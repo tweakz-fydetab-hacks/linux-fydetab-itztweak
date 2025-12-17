@@ -34,7 +34,7 @@ build() {
   sed -i 's|-std=gnu89|-std=gnu89 -Wno-array-compare -Wno-dangling-pointer -Wno-stringop-overread -Wno-misleading-indentation -Wno-address -Wno-unused-function|g' Makefile
   make olddefconfig prepare
   # edit makefile to add -rkr3 to localversion
-  sed -i 's|EXTRAVERSION =|EXTRAVERSION = -rkr3|g' Makefile
+  sed -i 's|^EXTRAVERSION =.*|EXTRAVERSION = -rkr3|g' Makefile
   make -s kernelrelease > version
   unset LDFLAGS
 
