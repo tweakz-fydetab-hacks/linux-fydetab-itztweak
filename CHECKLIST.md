@@ -3,7 +3,7 @@
 ## Current Status
 - **Kernel built:** linux-fydetab-itztweak-6.1.75-4
 - **Fix applied:** CONFIG_TRUSTED_KEYS=n (disabled TPM keys to fix ASN.1 build error)
-- **Packages location:** `~/builds/linux-fydetab-itztweak/*.pkg.tar.zst`
+- **Packages location:** `*.pkg.tar.zst (in this directory)`
 
 ---
 
@@ -22,7 +22,7 @@
 
 - [ ] Create SD rescue image with new kernel
   ```sh
-  cd ~/builds/linux-fydetab-itztweak
+  # From this directory:
   sudo ./create-sd-rescue.sh /dev/mmcblk1
   ```
 
@@ -49,7 +49,7 @@
   ```
 - [ ] Install new kernel to eMMC:
   ```sh
-  cd ~/builds/linux-fydetab-itztweak
+  # From this directory:
   sudo pacman -U linux-fydetab-itztweak-6.1.75-4-aarch64.pkg.tar.zst
   ```
 - [ ] Reboot and verify

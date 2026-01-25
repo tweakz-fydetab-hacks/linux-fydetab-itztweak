@@ -99,7 +99,7 @@ dtc -I dts -O dtb -o /boot/dtbs/overlays/disable-mali.dtbo /tmp/disable-mali.dts
 Edit `config` file and rebuild kernel:
 
 ```bash
-cd ~/builds/linux-fydetab-itztweak
+# From the kernel package directory:
 
 # Edit config - change these lines:
 # CONFIG_MALI_BIFROST=y  ->  # CONFIG_MALI_BIFROST is not set
@@ -177,7 +177,7 @@ panthor fb000000.gpu-panthor: [drm:panthor_devfreq_init [panthor]] *ERROR* Could
 
 **To build and test:**
 ```bash
-cd ~/builds/linux-fydetab-itztweak
+# From the kernel package directory:
 ./build.sh clean    # Clean rebuild with patch applied
 ```
 
@@ -198,7 +198,7 @@ Failed to setup: No GPUs found
 ```
 
 **Fix:** Changed `mesa-panfork-git` to `mesa` in:
-- `~/builds/fydetab-images/fydetab-arch/packages.aarch64`
+- ``images/fydetab-arch/packages.aarch64``
 
 **Note:** The kernel patch (Option 5) is correct. The panthor driver initialized properly:
 ```
@@ -261,8 +261,9 @@ sudo reboot
 **Current state (2026-01-22):** Panthor DTB-only fix failed (missing mali-supply). Permanent fix implemented as kernel patch.
 
 **Next steps:**
-1. Rebuild kernel: `cd ~/builds/linux-fydetab-itztweak && ./build.sh clean`
-2. Build new image: `cd ~/builds/fydetab-images && sudo ./fydetab-arch/profiledef -c fydetab-arch -w ./work -o ./out`
+1. Rebuild kernel: `# From the kernel package directory: && ./build.sh clean`
+2. Build new image: `# From the images directory:
+sudo ./fydetab-arch/profiledef -c fydetab-arch -w ./work -o ./out`
 3. Flash to SD and test
 
 **After reboot, verify with:**

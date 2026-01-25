@@ -30,17 +30,17 @@ sudo cp /boot/initramfs-linux-fydetab-itztweak.img /boot/initramfs-linux-fydetab
 
 ### Step 2: Check for Kernel Source Updates (Optional)
 
-If you want to update to a newer kernel version, check the upstream repository:
+If you want to update to a newer kernel version, check the upstream repository. From the kernel package directory (`pkgbuilds/linux-fydetab-itztweak/`):
 
 ```sh
-cd ~/builds/linux-fydetab-itztweak
 # Check PKGBUILD for source URL and update _commit or version if desired
 ```
 
 ### Step 3: Rebuild the Kernel
 
+From the kernel package directory (`pkgbuilds/linux-fydetab-itztweak/`):
+
 ```sh
-cd ~/builds/linux-fydetab-itztweak
 ./build.sh clean    # Fresh build (recommended if updating kernel version)
 # OR
 ./build.sh          # Resume/incremental build (if just recompiling same version)
@@ -53,8 +53,9 @@ ls -la *.pkg.tar.zst
 
 ### Step 4: Install the New Kernel
 
+From the kernel package directory (`pkgbuilds/linux-fydetab-itztweak/`):
+
 ```sh
-cd ~/builds/linux-fydetab-itztweak
 sudo pacman -U linux-fydetab-itztweak-*.pkg.tar.zst
 ```
 
@@ -98,7 +99,7 @@ See `RECOVERY.md` for U-Boot recovery procedures.
 
 ### Kernel build fails
 
-1. Check the build log: `~/builds/linux-fydetab-itztweak/logs/build-latest.log`
+1. Check the build log: `logs/build-latest.log`
 2. Common fixes:
    - Clean build: `./build.sh clean`
    - Check disk space: `df -h`
@@ -120,5 +121,5 @@ Recommended update frequency:
 ## Notes
 
 - The kernel build takes significant time on this device. Plan accordingly.
-- Build logs are saved to `~/builds/linux-fydetab-itztweak/logs/`
+- Build logs are saved to `logs/` in this directory
 - Always keep a backup of the last known working kernel
