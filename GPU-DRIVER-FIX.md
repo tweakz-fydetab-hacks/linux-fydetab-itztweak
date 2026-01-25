@@ -17,7 +17,7 @@ Persistent config: `~/.config/codium-flags.conf` contains `--ozone-platform=x11`
 - GPU: Mali G610 (CSF-based, needs panthor or patched panfrost)
 - Device tree compatible: `arm,mali-bifrost`
 - Mesa package: `mesa-panfork-git` (expects panfrost)
-- Kernel: Custom linux-fydetab 6.1.75
+- Kernel: Custom linux-fydetab-itztweak 6.1.75
 
 ## Investigation Findings
 
@@ -99,7 +99,7 @@ dtc -I dts -O dtb -o /boot/dtbs/overlays/disable-mali.dtbo /tmp/disable-mali.dts
 Edit `config` file and rebuild kernel:
 
 ```bash
-cd ~/builds/pkgbuilds/linux-fydetab
+cd ~/builds/linux-fydetab-itztweak
 
 # Edit config - change these lines:
 # CONFIG_MALI_BIFROST=y  ->  # CONFIG_MALI_BIFROST is not set
@@ -172,12 +172,12 @@ panthor fb000000.gpu-panthor: [drm:panthor_devfreq_init [panthor]] *ERROR* Could
 ```
 
 **Files changed:**
-- `linux-fydetab/PKGBUILD` - added patch to source array and prepare()
-- `linux-fydetab/enable-panthor-gpu.patch` - new patch file
+- `linux-fydetab-itztweak/PKGBUILD` - added patch to source array and prepare()
+- `linux-fydetab-itztweak/enable-panthor-gpu.patch` - new patch file
 
 **To build and test:**
 ```bash
-cd ~/builds/pkgbuilds/linux-fydetab
+cd ~/builds/linux-fydetab-itztweak
 ./build.sh clean    # Clean rebuild with patch applied
 ```
 
@@ -261,7 +261,7 @@ sudo reboot
 **Current state (2026-01-22):** Panthor DTB-only fix failed (missing mali-supply). Permanent fix implemented as kernel patch.
 
 **Next steps:**
-1. Rebuild kernel: `cd ~/builds/pkgbuilds/linux-fydetab && ./build.sh clean`
+1. Rebuild kernel: `cd ~/builds/linux-fydetab-itztweak && ./build.sh clean`
 2. Build new image: `cd ~/builds/fydetab-images && sudo ./fydetab-arch/profiledef -c fydetab-arch -w ./work -o ./out`
 3. Flash to SD and test
 
@@ -283,7 +283,7 @@ glxinfo | grep "OpenGL renderer"
 
 **Status:** PLANNING - not yet implemented
 
-Consider forking the `linux-fydetab` package to maintain custom configurations:
+Consider forking the `linux-fydetab-itztweak` package to maintain custom configurations:
 
 **Motivation:**
 - Upstream Fyde kernel config enables proprietary Mali drivers by default
@@ -291,7 +291,7 @@ Consider forking the `linux-fydetab` package to maintain custom configurations:
 - Want to maintain our own config set independent of upstream defaults
 
 **Proposed approach:**
-1. Create `linux-fydetab-custom` or similar fork package
+1. Create `linux-fydetab-itztweak-custom` or similar fork package
 2. Track upstream `Linux-for-Fydetab-Duo/linux-rockchip` noble-panthor branch
 3. Maintain custom config as overlay/patch on top of upstream
 4. When upstream updates: fetch new source, rebase config changes

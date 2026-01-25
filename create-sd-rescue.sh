@@ -71,12 +71,12 @@ cp -a /boot/dtbs "$MOUNTPOINT/boot/"
 
 # Extract NEW kernel package directly
 echo "  -> New kernel from package..."
-KERNELPKG=$(ls "$PKGDIR"/linux-fydetab-6.1.75-*.pkg.tar.zst 2>/dev/null | grep -v headers | head -1)
+KERNELPKG=$(ls "$PKGDIR"/linux-fydetab-itztweak-6.1.75-*.pkg.tar.zst 2>/dev/null | grep -v headers | head -1)
 if [[ -f "$KERNELPKG" ]]; then
     bsdtar -xf "$KERNELPKG" -C "$MOUNTPOINT"
     echo "    Installed: $KERNELPKG"
     # Create kernel symlink that mkinitcpio expects (pacman hooks normally do this)
-    ln -sf /usr/lib/modules/*/vmlinuz "$MOUNTPOINT/boot/vmlinuz-linux-fydetab"
+    ln -sf /usr/lib/modules/*/vmlinuz "$MOUNTPOINT/boot/vmlinuz-linux-fydetab-itztweak"
 else
     echo "Error: Kernel package not found in $PKGDIR"
     exit 1
@@ -157,7 +157,7 @@ echo "  -> Generating initramfs..."
 mount --bind /proc "$MOUNTPOINT/proc"
 mount --bind /sys "$MOUNTPOINT/sys"
 mount --bind /dev "$MOUNTPOINT/dev"
-chroot "$MOUNTPOINT" mkinitcpio -p linux-fydetab
+chroot "$MOUNTPOINT" mkinitcpio -p linux-fydetab-itztweak
 umount "$MOUNTPOINT/dev"
 umount "$MOUNTPOINT/sys"
 umount "$MOUNTPOINT/proc"

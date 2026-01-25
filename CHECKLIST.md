@@ -1,9 +1,9 @@
 # Kernel Update Checklist
 
 ## Current Status
-- **Kernel built:** linux-fydetab-6.1.75-4
+- **Kernel built:** linux-fydetab-itztweak-6.1.75-4
 - **Fix applied:** CONFIG_TRUSTED_KEYS=n (disabled TPM keys to fix ASN.1 build error)
-- **Packages location:** `~/builds/pkgbuilds/linux-fydetab/*.pkg.tar.zst`
+- **Packages location:** `~/builds/linux-fydetab-itztweak/*.pkg.tar.zst`
 
 ---
 
@@ -22,7 +22,7 @@
 
 - [ ] Create SD rescue image with new kernel
   ```sh
-  cd ~/builds/pkgbuilds/linux-fydetab
+  cd ~/builds/linux-fydetab-itztweak
   sudo ./create-sd-rescue.sh /dev/mmcblk1
   ```
 
@@ -44,13 +44,13 @@
 - [ ] Boot back into eMMC system
 - [ ] Backup current kernel:
   ```sh
-  sudo cp /boot/vmlinuz-linux-fydetab /boot/vmlinuz-linux-fydetab.backup
-  sudo cp /boot/initramfs-linux-fydetab.img /boot/initramfs-linux-fydetab.img.backup
+  sudo cp /boot/vmlinuz-linux-fydetab-itztweak /boot/vmlinuz-linux-fydetab-itztweak.backup
+  sudo cp /boot/initramfs-linux-fydetab-itztweak.img /boot/initramfs-linux-fydetab-itztweak.img.backup
   ```
 - [ ] Install new kernel to eMMC:
   ```sh
-  cd ~/builds/pkgbuilds/linux-fydetab
-  sudo pacman -U linux-fydetab-6.1.75-4-aarch64.pkg.tar.zst
+  cd ~/builds/linux-fydetab-itztweak
+  sudo pacman -U linux-fydetab-itztweak-6.1.75-4-aarch64.pkg.tar.zst
   ```
 - [ ] Reboot and verify
 
@@ -91,10 +91,10 @@ tail -f logs/build-latest.log
 sudo ./create-sd-rescue.sh /dev/mmcblk1
 
 # Install to eMMC (after testing)
-sudo pacman -U linux-fydetab-6.1.75-4-aarch64.pkg.tar.zst
+sudo pacman -U linux-fydetab-itztweak-6.1.75-4-aarch64.pkg.tar.zst
 
 # Update system (after kernel)
-paru -Syu --ignore linux-fydetab,linux-fydetab-headers
+paru -Syu --ignore linux-fydetab-itztweak,linux-fydetab-itztweak-headers
 ```
 
 ---

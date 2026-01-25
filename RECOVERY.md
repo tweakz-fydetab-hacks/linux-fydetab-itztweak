@@ -9,16 +9,16 @@ The FydeTab Duo uses U-Boot as its bootloader. The boot sequence:
 1. U-Boot initializes from SPI flash
 2. U-Boot reads `/boot/boot.scr.uimg` (boot script)
 3. Boot script loads:
-   - `/boot/vmlinuz-linux-fydetab` (kernel)
-   - `/boot/initramfs-linux-fydetab.img` (initramfs)
+   - `/boot/vmlinuz-linux-fydetab-itztweak` (kernel)
+   - `/boot/initramfs-linux-fydetab-itztweak.img` (initramfs)
    - `/boot/dtbs/rockchip/rk3588s-fydetab-duo.dtb` (device tree)
 4. Kernel boots
 
 ## Current Boot Configuration
 
 ```
-Kernel:    /boot/vmlinuz-linux-fydetab
-Initramfs: /boot/initramfs-linux-fydetab.img
+Kernel:    /boot/vmlinuz-linux-fydetab-itztweak
+Initramfs: /boot/initramfs-linux-fydetab-itztweak.img
 DTB:       /boot/dtbs/rockchip/rk3588s-fydetab-duo.dtb
 Root:      ext4, partition 2, detected by PARTUUID
 Console:   ttyFIQ0 (serial) + tty1 (display)
@@ -52,23 +52,23 @@ You need ONE of the following:
 
 4. At the U-Boot prompt, boot from backup:
    ```
-   setenv linux_image /boot/vmlinuz-linux-fydetab.backup
-   setenv initrd /boot/initramfs-linux-fydetab.img.backup
+   setenv linux_image /boot/vmlinuz-linux-fydetab-itztweak.backup
+   setenv initrd /boot/initramfs-linux-fydetab-itztweak.img.backup
    boot
    ```
 
 5. Once booted, restore the backup permanently:
    ```sh
-   sudo cp /boot/vmlinuz-linux-fydetab.backup /boot/vmlinuz-linux-fydetab
-   sudo cp /boot/initramfs-linux-fydetab.img.backup /boot/initramfs-linux-fydetab.img
+   sudo cp /boot/vmlinuz-linux-fydetab-itztweak.backup /boot/vmlinuz-linux-fydetab-itztweak
+   sudo cp /boot/initramfs-linux-fydetab-itztweak.img.backup /boot/initramfs-linux-fydetab-itztweak.img
    ```
 
 ### Making Backup Bootable via Menu (Advanced)
 
 You can create a boot script with a menu. Create `/boot/boot.cmd`:
 ```
-setenv bootmenu_0 "Normal Boot=setenv linux_image /boot/vmlinuz-linux-fydetab; setenv initrd /boot/initramfs-linux-fydetab.img; run bootcmd_normal"
-setenv bootmenu_1 "Backup Kernel=setenv linux_image /boot/vmlinuz-linux-fydetab.backup; setenv initrd /boot/initramfs-linux-fydetab.img.backup; run bootcmd_normal"
+setenv bootmenu_0 "Normal Boot=setenv linux_image /boot/vmlinuz-linux-fydetab-itztweak; setenv initrd /boot/initramfs-linux-fydetab-itztweak.img; run bootcmd_normal"
+setenv bootmenu_1 "Backup Kernel=setenv linux_image /boot/vmlinuz-linux-fydetab-itztweak.backup; setenv initrd /boot/initramfs-linux-fydetab-itztweak.img.backup; run bootcmd_normal"
 setenv bootmenu_delay 5
 bootmenu
 ```
@@ -101,8 +101,8 @@ mkimage -A arm64 -T script -C none -d /boot/boot.cmd /boot/boot.scr.uimg
 
 4. Restore kernel backup:
    ```sh
-   sudo cp /mnt/boot/vmlinuz-linux-fydetab.backup /mnt/boot/vmlinuz-linux-fydetab
-   sudo cp /mnt/boot/initramfs-linux-fydetab.img.backup /mnt/boot/initramfs-linux-fydetab.img
+   sudo cp /mnt/boot/vmlinuz-linux-fydetab-itztweak.backup /mnt/boot/vmlinuz-linux-fydetab-itztweak
+   sudo cp /mnt/boot/initramfs-linux-fydetab-itztweak.img.backup /mnt/boot/initramfs-linux-fydetab-itztweak.img
    ```
 
 5. Unmount and reboot:
@@ -141,8 +141,8 @@ If U-Boot itself is corrupted, you can use Maskrom mode to reflash.
 
 1. **Always maintain kernel backups:**
    ```sh
-   sudo cp /boot/vmlinuz-linux-fydetab /boot/vmlinuz-linux-fydetab.backup
-   sudo cp /boot/initramfs-linux-fydetab.img /boot/initramfs-linux-fydetab.img.backup
+   sudo cp /boot/vmlinuz-linux-fydetab-itztweak /boot/vmlinuz-linux-fydetab-itztweak.backup
+   sudo cp /boot/initramfs-linux-fydetab-itztweak.img /boot/initramfs-linux-fydetab-itztweak.img.backup
    ```
 
 2. **Keep a bootable SD card ready** with a working system

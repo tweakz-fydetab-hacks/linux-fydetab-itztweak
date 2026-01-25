@@ -1,16 +1,17 @@
 # AArch64 multi-platform
-# Maintainer: Panda <panda@fydeos.io>
+# Maintainer: itzTweak <itzTweak@pm.me>
+# Contributor: Panda <panda@fydeos.io>
 
 buildarch=8
-_kernel=linux-fydetab
+_kernel=linux-fydetab-itztweak
 pkgbase=$_kernel
 pkgname=("${pkgbase}-headers" $pkgbase)
 pkgver=6.1.75
-pkgrel=5
+pkgrel=1
 arch=('aarch64')
 license=('GPL2')
-url="https://github.com/Linux-for-Fydetab-Duo/linux-rockchip"
-pkgdesc="The Linux Kernel and modules"
+url="https://github.com/tweakz-fydetab-hacks/linux-fydetab-itztweak"
+pkgdesc="Linux kernel for FydeTab Duo (RK3588) with Panthor GPU — by itzTweak"
 optdepends=('mali-G610-firmware-rkr4: Mali G610 firmware for Rockchip RK3588')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git' 'uboot-tools' 'vboot-utils' 'dtc')
 options=('!strip' 'ccache')
@@ -51,7 +52,9 @@ _package() {
   pkgdesc="The Linux Kernel and modules"
   depends=('coreutils' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('wireless-regdb: to set the correct wireless channels of your country')
-  provides=("linux-fydetab=${pkgver}" "linux" "panthor")
+  provides=("linux-fydetab-itztweak=${pkgver}" "linux-fydetab=${pkgver}" "linux" "panthor")
+  conflicts=("linux-fydetab")
+  replaces=("linux-fydetab")
   backup=("etc/mkinitcpio.d/${_kernel}.preset")
 
   cd linux-rockchip
@@ -84,8 +87,10 @@ _package() {
 }
 
 _package-headers() {
-  pkgdesc="The Linux Kernel and modules - Headers"
-  provides=("linux-headers=${pkgver}")
+  pkgdesc="Linux kernel headers for FydeTab Duo — by itzTweak"
+  provides=("linux-headers=${pkgver}" "linux-fydetab-headers=${pkgver}")
+  conflicts=("linux-fydetab-headers")
+  replaces=("linux-fydetab-headers")
 
   cd linux-rockchip
   local _version="$(<version)"

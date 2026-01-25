@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the linux-fydetab kernel package will be documented in this file.
+All notable changes to the linux-fydetab-itztweak kernel package will be documented in this file.
 
 ## [Unreleased]
 

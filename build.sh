@@ -5,7 +5,7 @@
 
 set -o pipefail
 
-LOGDIR="$HOME/builds/pkgbuilds/linux-fydetab/logs"
+LOGDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/logs"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 BUILDLOG="$LOGDIR/build-$TIMESTAMP.log"
 SYSLOG="$LOGDIR/system-$TIMESTAMP.log"
