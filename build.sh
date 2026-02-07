@@ -15,7 +15,7 @@ mkdir -p "$LOGDIR"
 # Clean if requested
 if [[ "$1" == "clean" ]]; then
     echo "Cleaning previous build..."
-    rm -rf src pkg
+    rm -rf src pkg *.pkg.tar.zst
 fi
 
 # Capture system state before build
@@ -38,7 +38,7 @@ echo "System log: $SYSLOG"
 echo "Starting build at $(date)..."
 
 # Run build, capturing output
-makepkg -s 2>&1 | tee "$BUILDLOG"
+makepkg -sf 2>&1 | tee "$BUILDLOG"
 BUILD_EXIT=${PIPESTATUS[0]}
 
 # Capture post-build state
